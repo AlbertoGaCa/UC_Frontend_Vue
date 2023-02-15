@@ -9,6 +9,8 @@ const storeAlmacenes = useAlmacenesStore();
 
 // States
 const almacenSelect = ref("");
+const articuloEscogido = ref({});
+const cantidad = ref(1);
 const getAlmacenes = computed(() => {
   return storeAlmacenes.almacenes;
 });
@@ -23,6 +25,10 @@ const openModal = (nameId) => {
   });
   modal.show();
 };
+
+const onChangeSeleccionArticulo = () => {
+  
+}
 
 const selectAlmacenValue = (almacen) => {
   almacenSelect.value = almacen;
@@ -45,14 +51,14 @@ onMounted(() => {
               <div class="d-flex flex-column pt-4 ps-4 pb-4">
                 <div class="label-roboto-400">Codigo</div>
                 <div class="pt-1">
-                  <input class="form-control" type="text" />
+                  <input class="form-control" type="text" :value="articuloEscogido.barcode"/>
                 </div>
               </div>
             </div>
             <div class="col-1">
               <div class="label-roboto-400">Cant.</div>
               <div class="pt-1">
-                <input class="form-control" type="text" />
+                <input class="form-control" type="text" :value="cantidad" @change=""/>
               </div>
             </div>
             <div class="col-1">
@@ -176,7 +182,7 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  <SeleccionArticulo />
+  <SeleccionArticulo :check-existencia="true" v-model="articuloEscogido"/>
 </template>
 
 <style scoped>
